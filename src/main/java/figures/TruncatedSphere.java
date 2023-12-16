@@ -4,44 +4,49 @@ import point.Point;
 
 public class TruncatedSphere extends Figure {
 
+    public static String INVALID = "The figure is invalid";
+    public static String VALID = "The figure is valid";
+    public static int THIRD_POINT = 2;
+    public static int POINTS_SIZE = 3;
+
     public TruncatedSphere(Point points) {
         super(points);
     }
 
     @Override
     public String isValid() {
-        if (this.points.getSize() != 3) {
-            return "The figure is invalid";
+        if (this.points.getSize() != POINTS_SIZE) {
+            return INVALID;
         }
 
         if (
                 this.points.getPoints().get(0)[0] == this.points.getPoints().get(1)[0]
                 && this.points.getPoints().get(0)[1] == this.points.getPoints().get(1)[1]
-                && this.points.getPoints().get(0)[2] == this.points.getPoints().get(1)[2]
+                && this.points.getPoints().get(0)[THIRD_POINT] == this.points.getPoints().get(1)[THIRD_POINT]
         ) {
-            return "The figure is invalid";
+            return INVALID;
         }
 
         if (
-                !(this.points.getPoints().get(2)[0] <= this.points.getPoints().get(1)[0])
-                || !(this.points.getPoints().get(2)[1] <= this.points.getPoints().get(1)[1])
-                || !(this.points.getPoints().get(2)[2] <= this.points.getPoints().get(1)[2])
+                !(this.points.getPoints().get(THIRD_POINT)[0] <= this.points.getPoints().get(1)[0])
+                || !(this.points.getPoints().get(THIRD_POINT)[1] <= this.points.getPoints().get(1)[1])
+                || !(this.points.getPoints().get(THIRD_POINT)[THIRD_POINT] <= this.points.getPoints().get(1)[THIRD_POINT])
         ) {
-            return "The figure is invalid";
+            return INVALID;
         }
-        return "The figure is valid";
+        return VALID;
     }
 
     public double getSide(int[] firstPoint, int[] secondPoint) {
-        return Math.sqrt(Math.pow(firstPoint[0] - secondPoint[0], 2)
-                + Math.pow(firstPoint[1] - secondPoint[1], 2)
-                + Math.pow(firstPoint[2] - secondPoint[2], 2));
+        return Math.sqrt(Math.pow(firstPoint[0] - secondPoint[0], THIRD_POINT)
+                + Math.pow(firstPoint[1] - secondPoint[1], THIRD_POINT)
+                + Math.pow(firstPoint[THIRD_POINT] - secondPoint[THIRD_POINT], THIRD_POINT));
     }
 
     @Override
     public String getSquare() {
         double radius = getSide(this.points.getPoints().get(0), this.points.getPoints().get(1));
-        double height = getSide(this.points.getPoints().get(0), this.points.getPoints().get(2));
+        double height = getSide(this.points.getPoints().get(0), this.points.getPoints().get(THIRD_POINT));
 
         double square = Math.PI * height * (4 * radius - height);
 

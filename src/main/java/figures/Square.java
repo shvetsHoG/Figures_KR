@@ -4,6 +4,12 @@ import point.Point;
 
 public class Square extends Figure {
 
+    public static String INVALID = "The figure is invalid";
+    public static String VALID = "The figure is valid";
+    public static int THIRD_POINT = 2;
+    public static int FOURTH_POINT = 3;
+    public static int POINTS_SIZE = 4;
+
     public Square(Point points) {
         super(points);
     }
@@ -14,23 +20,23 @@ public class Square extends Figure {
 
     @Override
     public String isValid() {
-        if (this.points.getSize() != 4) {
-            return "The figure is invalid";
+        if (this.points.getSize() != POINTS_SIZE) {
+            return INVALID;
         }
 
         double firstSide = getSide(this.points.getPoints().get(0), this.points.getPoints().get(1));
-        double secondSide = getSide(this.points.getPoints().get(1), this.points.getPoints().get(2));
-        double thirdSide = getSide(this.points.getPoints().get(2), this.points.getPoints().get(3));
-        double fourthSide = getSide(this.points.getPoints().get(3), this.points.getPoints().get(0));
+        double secondSide = getSide(this.points.getPoints().get(1), this.points.getPoints().get(THIRD_POINT));
+        double thirdSide = getSide(this.points.getPoints().get(THIRD_POINT), this.points.getPoints().get(FOURTH_POINT));
+        double fourthSide = getSide(this.points.getPoints().get(FOURTH_POINT), this.points.getPoints().get(0));
 
         if (
                 firstSide != secondSide
                 && firstSide != thirdSide
                 && firstSide != fourthSide
         ) {
-            return "The figure is invalid";
+            return INVALID;
         }
-        return "The figure is valid";
+        return VALID;
     }
 
     @Override
@@ -44,7 +50,7 @@ public class Square extends Figure {
     @Override
     public String getPerimeter() {
         double side = getSide(this.points.getPoints().get(0), this.points.getPoints().get(1));
-        double perimeter = side * 4;
+        double perimeter = side * POINTS_SIZE;
 
         return Double.toString(perimeter);
     }

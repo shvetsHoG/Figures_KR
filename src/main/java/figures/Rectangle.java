@@ -6,6 +6,12 @@ import java.util.List;
 
 public class Rectangle extends Figure {
 
+    public static String INVALID = "The figure is invalid";
+    public static String VALID = "The figure is valid";
+    public static int THIRD_POINT = 2;
+    public static int FOURTH_POINT = 3;
+    public static int POINTS_SIZE = 4;
+
     public Rectangle(Point points) {
         super(points);
     }
@@ -36,31 +42,31 @@ public class Rectangle extends Figure {
             }
         }
 
-        return count == 4;
+        return count == POINTS_SIZE;
     }
 
     @Override
     public String isValid() {
-        if (this.points.getSize() != 4) {
-            return "The figure is invalid";
+        if (this.points.getSize() != POINTS_SIZE) {
+            return INVALID;
         }
 
         if (!isOnOneSide(points.getPoints())) {
-            return "The figure is invalid";
+            return INVALID;
         }
 
-        return "The figure is valid";
+        return VALID;
     }
 
     public double getSide(int[] firstPoint, int[] secondPoint) {
-        return Math.sqrt(Math.pow(Math.abs(firstPoint[0]) - Math.abs(secondPoint[0]), 2)
-                + Math.pow(Math.abs(firstPoint[1]) - Math.abs(secondPoint[1]), 2));
+        return Math.sqrt(Math.pow(Math.abs(firstPoint[0]) - Math.abs(secondPoint[0]), THIRD_POINT)
+                + Math.pow(Math.abs(firstPoint[1]) - Math.abs(secondPoint[1]), THIRD_POINT));
     }
 
     @Override
     public String getSquare() {
         double firstSide = getSide(this.points.getPoints().get(0), this.points.getPoints().get(1));
-        double secondSide = getSide(this.points.getPoints().get(1), this.points.getPoints().get(2));
+        double secondSide = getSide(this.points.getPoints().get(1), this.points.getPoints().get(THIRD_POINT));
 
         double square = firstSide * secondSide;
 
@@ -70,9 +76,9 @@ public class Rectangle extends Figure {
     @Override
     public String getPerimeter() {
         double firstSide = getSide(this.points.getPoints().get(0), this.points.getPoints().get(1));
-        double secondSide = getSide(this.points.getPoints().get(1), this.points.getPoints().get(2));
-        double thirdSide = getSide(this.points.getPoints().get(2), this.points.getPoints().get(3));
-        double fourthSide = getSide(this.points.getPoints().get(3), this.points.getPoints().get(0));
+        double secondSide = getSide(this.points.getPoints().get(1), this.points.getPoints().get(THIRD_POINT));
+        double thirdSide = getSide(this.points.getPoints().get(THIRD_POINT), this.points.getPoints().get(FOURTH_POINT));
+        double fourthSide = getSide(this.points.getPoints().get(FOURTH_POINT), this.points.getPoints().get(0));
 
 
         double perimeter = firstSide + secondSide + thirdSide + fourthSide;

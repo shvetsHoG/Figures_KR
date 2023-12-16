@@ -4,6 +4,10 @@ import point.Point;
 
 public class Polygon extends Figure {
 
+    public static String INVALID = "The figure is invalid";
+    public static String VALID = "The figure is valid";
+    public static int THIRD_POINT = 2;
+
     public Polygon(Point points) {
         super(points);
     }
@@ -11,13 +15,13 @@ public class Polygon extends Figure {
     @Override
     public String isValid() {
         if (!isOnOneSide()) {
-            return "The figure is invalid";
+            return INVALID;
         }
-        return "The figure is valid";
+        return VALID;
     }
 
     public double getSide(int[] firstPoint, int[] secondPoint) {
-        return Math.sqrt(Math.pow(firstPoint[0] - secondPoint[0], 2) + Math.pow(firstPoint[1] - secondPoint[1], 2));
+        return Math.sqrt(Math.pow(firstPoint[0] - secondPoint[0], THIRD_POINT) + Math.pow(firstPoint[1] - secondPoint[1], THIRD_POINT));
     }
 
     public boolean isOnOneSide() {
