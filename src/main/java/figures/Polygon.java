@@ -21,6 +21,21 @@ public class Polygon extends Figure {
     }
 
     public boolean isOnOneSide() {
+        int countX = 0;
+        int countY = 0;
+        for (int i = 0; i < points.getSize(); i++) {
+            if (points.getPoints().get(0)[0] == points.getPoints().get(i)[0]) {
+                countX++;
+            }
+
+            if (points.getPoints().get(0)[1] == points.getPoints().get(i)[1]) {
+                countY++;
+            }
+        }
+
+        if (countX == points.getSize() || countY == points.getSize()) {
+            return false;
+        }
         return true;
     }
 

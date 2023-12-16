@@ -1,5 +1,8 @@
 ### IntelliJ IDEA ###
 out/
+/libs
+.idea
+/out
 uml.plantuml
 DZ1.iml
 uml.png
